@@ -18,10 +18,10 @@ exports.addProductController = async (req, res, next) => {
     }
 }
 exports.findAllProductsController = async (req, res, next) => {
-    const { name, price } = req.body;
+    const { name } = req.body;
     try {
         const findProduct = new Product();
-        await findProduct.find({ name: name, price: price }, function (err, data, next) {
+        await findProduct.find({ name: name }, function (err, data, next) {
             if (!name || !price) next(err);
             done(null, res.json({ data }))
         })
