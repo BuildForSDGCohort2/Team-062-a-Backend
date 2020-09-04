@@ -1,5 +1,4 @@
 const { Product } = require('../Database');
-const { deleteOne } = require('../Database/Models/product');
 
 exports.addProductController = async (req, res, next) => {
     const { name, properties } = req.body;
