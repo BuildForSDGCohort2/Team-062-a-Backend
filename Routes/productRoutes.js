@@ -1,10 +1,10 @@
 const express = require("express");
-const { productController, findAllProductsController, getAllProductsController } = require("../Controllers/productController");
+const { addProductController, findProductsController, getAllProductsController } = require("../Controllers/productController");
 const router = express.Router();
-const { getToken, auth} = require("../Middlewares");
+const auth  = require("../Middlewares/auth");
 
-router.post('/products', getToken, auth, addProductController);
-router.post('/products/:name', findAllProductsController);
+router.post('/products', auth, addProductController);
+router.get('/products/:productId', findProductsController);
 router.get('/products', getAllProductsController);
 
 module.exports = router;

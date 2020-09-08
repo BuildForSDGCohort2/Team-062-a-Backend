@@ -28,7 +28,7 @@ app.use(routes);
 
 errorHandler(app);
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const databaseUrl = isProd ? config.databaseUrl.prod : config.databaseUrl.dev;
 
 const startServer = () =>

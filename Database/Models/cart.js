@@ -6,10 +6,6 @@ const CartSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    modifiedOn: {
-      type: Date,
-      default: Date.now,
-    },
     products: [
       {
         productId: Number,
@@ -25,6 +21,6 @@ const CartSchema = new Schema(
   },
   { timestamps: true }
 );
-const CartModel = mongoose.model("Order", CartSchema);
+const CartModel = mongoose.model("Cart", CartSchema);
 
 module.exports = CartModel;
