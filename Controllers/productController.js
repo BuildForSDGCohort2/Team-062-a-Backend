@@ -1,37 +1,45 @@
 const { Product } = require('../Database');
 
 exports.addProductController = async (req, res, next) => {
-    const { name, properties } = req.body;
+    const data = req.body;
     try {
-        const newProduct = new Product();
-        newProduct.name = name;
-        newProduct.properties = properties;
-        await newProduct.save();
-        res.status(201).json({
+        const product = new Product(data);
+        await product.save();
+        return res.status(201).json({
             success: true,
-            message: "Product successfully added to Inventory"
+            message: "Product successfully added to Inventory",
+            product
         });
     }
     catch (e) {
         next(e);
     }
 }
-exports.findAllProductsController = async (req, res, next) => {
-    const { name } = req.body;
+
+
+exports.getAllProductsController= async (req, res, next) => {
     try {
-        const findProduct = new Product();
-        await findProduct.find({ name: name }, function (err, data, next) {
-            if (!name || !price) next(err);
-            done(null, res.json({ data }))
-        })
+        const allProducts = await Product.find({})
+
+        return res.status(200).json({
+            success: true,
+            products: allProducts
+        });
     } catch (e) {
         next(e)
     }
 }
 
-exports.getAllProductsController = (req, res, next) => {
-        const findAllProducts = new Product(); 
-        findAllProducts.find()
-            .then((result) => res.send(result))
-            .catch((err) => next(err))
+exports.findProductsController = async (req, res, next) => {
+    const productId = req.params.productId
+    try {
+        const product  = await Product.findById(productId)
+        return res.status(200).json({
+            success: true,
+            product
+        });
+    } catch (e) {
+        next(e)
+    }
+   
 }
